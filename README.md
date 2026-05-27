@@ -11,30 +11,57 @@ ResepKu adalah aplikasi mobile berbasis **Flutter** yang dirancang untuk memberi
 ## ✨ Fitur Utama
 
 ### 🔐 Autentikasi & Akun
-- **Register** - Daftar akun baru untuk memulai
+### **Register** - Daftar akun baru untuk memulai
+- <img width="720" height="1600" alt="image" src="https://github.com/user-attachments/assets/94c4a72b-d769-443b-9137-7350e2eba78f" />
+
 - **Login** - Masuk ke akun Anda
+- <img width="720" height="1600" alt="image" src="https://github.com/user-attachments/assets/76c75717-4c06-4afb-a2fb-5c89ba5376f2" />
+
 - **Logout** - Keluar dari akun
+- <img width="720" height="1600" alt="image" src="https://github.com/user-attachments/assets/c28beacf-58e9-474b-965c-3ee836b50319" />
+
 
 ### 🏠 Browsing & Eksplorasi
 - **Home** - Halaman utama dengan rekomendasi resep terbaru
+- <img width="720" height="1600" alt="image" src="https://github.com/user-attachments/assets/f6030033-93e5-43d7-a6a5-b4941f4a963a" />
+
+
 - **Detail Resep** - Lihat informasi lengkap resep termasuk bahan dan cara memasak
+- <img width="720" height="1600" alt="image" src="https://github.com/user-attachments/assets/02032808-610a-4abd-9790-78fdaeaf34c3" />
+
 - **Pencarian** - Cari resep berdasarkan nama atau kategori
+  
 - **Favorit** - Simpan resep favorit untuk akses cepat
+- <img width="1080" height="2400" alt="image" src="https://github.com/user-attachments/assets/eba52bdc-79fa-47ab-b9f0-5b99c1f5fed7" />
+
 
 ### 📝 Manajemen Resep Pribadi
 - **Resep Saya** - Lihat daftar semua resep yang telah Anda buat
+- <img width="1080" height="2400" alt="image" src="https://github.com/user-attachments/assets/5a2289de-d43a-4e02-99fd-93a597475961" />
+
 - **Tambah Resep** - Buat dan unggah resep baru
+  <img width="1080" height="2400" alt="image" src="https://github.com/user-attachments/assets/219b0d58-7b04-4f14-828a-57daa3df5607" />
+
 - **Edit Resep** - Perbarui resep yang sudah ada
 - **Hapus Resep** - Menghapus resep dari koleksi Anda
 
 ### 💬 Interaksi Sosial
 - **Komentar Resep** - Berikan komentar dan feedback pada resep
+- <img width="720" height="1600" alt="image" src="https://github.com/user-attachments/assets/4c690336-341e-4ed3-8ade-065a38a4f60d" />
+
+
 - **Share Resep** - Bagikan resep dalam bentuk teks ke platform lain
+  <img width="720" height="1600" alt="image" src="https://github.com/user-attachments/assets/b908c072-969a-4dd2-abe7-5422297a878b" />
+
 
 ### 👤 Profil & Pengaturan
 - **Profil** - Lihat dan kelola profil pengguna Anda
-- **Edit Foto Profil** - Perbarui foto profil Anda
-- **Ganti Password** - Ubah password akun Anda untuk keamanan
+  <img width="720" height="1600" alt="image" src="https://github.com/user-attachments/assets/5470da6b-50ee-43ec-aa65-697290cbb6eb" />
+
+### **Edit Foto Profil** - Perbarui foto profil Anda
+### **Ganti Password** - Ubah password akun Anda untuk keamanan
+  <img width="720" height="1600" alt="image" src="https://github.com/user-attachments/assets/d7b92ac0-49d7-4c5d-b27e-3d7230e776aa" />
+
 
 ---
 
