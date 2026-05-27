@@ -1,0 +1,129 @@
+{
+    "success": true,
+    "message": "Daftar resep",
+    "data": [
+        {
+            "id": 11,
+            "title": "d66fby",
+            "description": "rzfy im",
+            "ingredients": [
+                "u6bkh",
+                "7fviubin"
+            ],
+            "steps": [
+                "ycyyb6u",
+                "y 6gbi"
+            ],
+            "image": "recipes\/HY4E7SGGXWQZYYZnjJYUXO6WNnxkfxEREO0IEHwS.jpg",
+            "user_id": 1,
+            "created_at": "2026-01-18T18:41:11.000000Z",
+            "updated_at": "2026-01-18T18:41:11.000000Z",
+            "image_url": "http:\/\/127.0.0.1:8000\/storage\/recipes\/HY4E7SGGXWQZYYZnjJYUXO6WNnxkfxEREO0IEHwS.jpg"
+        },
+        {
+            "id": 10,
+            "title": "resep",
+            "description": "tdhc",
+            "ingredients": [
+                "chvy",
+                "bjcuno",
+                "hviho",
+                "yfhhl"
+            ],
+            "steps": [
+                "uvyvbi",
+                "vktuvib",
+                "fuftxgib",
+                "hufgchbuuv",
+                "jgubi",
+                "ufufuvi",
+                "ufuqfbbu"
+            ],
+            "image": "recipes\/HMyxjaXogL5TEquOYfxgOkjAJWFVSWJNgv2VkEDD.jpg",
+            "user_id": 1,
+            "created_at": "2026-01-18T18:39:22.000000Z",
+            "updated_at": "2026-01-18T18:39:22.000000Z",
+            "image_url": "http:\/\/127.0.0.1:8000\/storage\/recipes\/HMyxjaXogL5TEquOYfxgOkjAJWFVSWJNgv2VkEDD.jpg"
+        },
+        {
+            "id": 9,
+            "title": "Ayam Goreng",
+            "description": "Gurih, renyah, dan enak",
+            "ingredients": [
+                "Ayam",
+                "Bumbu marinasi"
+            ],
+            "steps": [
+                "Cuci ayam hingga bersih",
+                "Marinasi dengan bumbu yabg sudah disiapkan",
+                "Diamkan 30 menit",
+                "Ayam siap digoreng"
+            ],
+            "image": "recipes\/RSKgX532e0GpHmDoePsnTBsqZlBYhV7eN5DLot9m.jpg",
+            "user_id": 1,
+            "created_at": "2026-01-18T18:33:38.000000Z",
+            "updated_at": "2026-01-18T18:33:38.000000Z",
+            "image_url": "http:\/\/127.0.0.1:8000\/storage\/recipes\/RSKgX532e0GpHmDoePsnTBsqZlBYhV7eN5DLot9m.jpg"
+        },
+        {
+            "id": 6,
+            "title": "Nasi Goreng",
+            "description": "Nasi goreng ala anak kos",
+            "ingredients": [
+                "1 siung bawang putih, iris tipis",
+                "1 siung bawang merah, iris tipis",
+                "2 buah cabai rawit atau sesuai selera, iris tipis",
+                "1 buah cabai merah atau sesuai selera, iris tipis",
+                "Kecap manis",
+                "Minyak goreng",
+                "Garam",
+                "Penyedap rasa"
+            ],
+            "steps": [
+                "Panaskan minyak goreng di wajan, Lalu, tumis bawang putih dan bawang merah hingga harum.",
+                "Masukkan nasi dan bahan lainnya. Aduk sampai merata, koreksi rasa, dan sajikan."
+            ],
+            "image": null,
+            "user_id": 3,
+            "created_at": "2026-01-17T19:08:43.000000Z",
+            "updated_at": "2026-01-17T19:08:43.000000Z",
+            "image_url": null
+        },
+        {
+            "id": 5,
+            "title": "Telur Ceplok Polos",
+            "description": "Telur mata sapi dua",
+            "ingredients": "[\"Telur dua\",\"Penyedap\"]",
+            "steps": "[\"Panaskan minyak\",\"Pecahkan telur dan langsung masukkan dalam minyak panas\",\"Beri penyedap sesuai selera\",\"Balik telur ketika yang bagian bawah sudah matang, tunggu sebentar\",\"Angkat dan bisa disajikan\"]",
+            "image": "recipes\/WLKu5UcrsTnYYHxPKPCsNV2dBkZ8he5Kl5YKDziZ.jpg",
+            "user_id": 1,
+            "created_at": "2026-01-13T17:22:15.000000Z",
+            "updated_at": "2026-01-18T22:45:55.000000Z",
+            "image_url": "http:\/\/127.0.0.1:8000\/storage\/recipes\/WLKu5UcrsTnYYHxPKPCsNV2dBkZ8he5Kl5YKDziZ.jpg"
+        },
+        {
+            "id": 3,
+            "title": "Indomie Goreng Nyemek Level 5",
+            "description": "Lebih pedas dan mantap",
+            "ingredients": "[\"3 bungkus indomie\",\"6 cabai rawit\",\"5 butir telur\",\"Air secukupnya\"]",
+            "steps": "[\"Rebus air\",\"Masukkan mie\",\"Masukkan telur\",\"Masukkan bumbu dan cabai\",\"Sajikan\"]",
+            "image": "recipes\/v7DAQlhBkDGxeiMo9m6FvdnWBrePzwRxmJs60JpF.jpg",
+            "user_id": 1,
+            "created_at": "2026-01-13T16:15:30.000000Z",
+            "updated_at": "2026-01-19T10:26:37.000000Z",
+            "image_url": "http:\/\/127.0.0.1:8000\/storage\/recipes\/v7DAQlhBkDGxeiMo9m6FvdnWBrePzwRxmJs60JpF.jpg"
+        },
+        {
+            "id": 2,
+            "title": "Indomie Goreng Nyemek",
+            "description": "Murah, praktis, dan enak",
+            "ingredients": "[\"3 bungkus indomie\",\"5 butir telur\",\"Air secukupnya\",\"Cabai rawit sesuai selera\"]",
+            "steps": "[\"Rebus air\",\"Masukkan mie\",\"Masukkan telur (orak arik)\",\"Masukkan bumbu dan cabai rawit\",\"Jika sudah dirasa matang, sajikan\"]",
+            "image": null,
+            "user_id": 1,
+            "created_at": "2026-01-12T20:15:03.000000Z",
+            "updated_at": "2026-01-12T20:15:03.000000Z",
+            "image_url": null
+        }
+    ]
+}
