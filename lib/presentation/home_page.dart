@@ -296,10 +296,19 @@ class _HomePageState extends State<HomePage> {
       selectedItemColor: primaryBrown,
       unselectedItemColor: Colors.grey,
       type: BottomNavigationBarType.fixed,
-      onTap: (index) {
-        setState(() => _selectedIndex = index);
-      },
+      onTap: (index) async {
+        setState(() {
+          _selectedIndex = index;
+        });
 
+        if (index == 0) {
+          await viewModel.fetchRecipes();
+
+          setState(() {
+            _filteredRecipes = viewModel.recipes;
+          });
+        }
+      },
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
         BottomNavigationBarItem(icon: Icon(Icons.book), label: "Resep Saya"),
