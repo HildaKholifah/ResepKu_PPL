@@ -25,10 +25,21 @@ class UserRepository {
     return loginResponse;
   }
 
+  // Future<RegisterResponse> register(RegisterRequest request) async {
+  //   final response = await httpService.post('register', request.toMap());
+
+  //   final decoded = jsonDecode(response.body);
+  //   return RegisterResponse.fromMap(decoded);
+  // }
+
   Future<RegisterResponse> register(RegisterRequest request) async {
     final response = await httpService.post('register', request.toMap());
 
+    print("STATUS CODE : ${response.statusCode}");
+    print("BODY : ${response.body}");
+
     final decoded = jsonDecode(response.body);
+
     return RegisterResponse.fromMap(decoded);
   }
 

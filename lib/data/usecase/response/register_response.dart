@@ -9,9 +9,9 @@ class RegisterResponse {
 
   factory RegisterResponse.fromMap(Map<String, dynamic> json) {
     return RegisterResponse(
-      success: json['success'] ?? false,
+      success: json['status'] == 'success',
       message: json['message'] ?? '',
-      data: json['data'] != null ? RegisterData.fromMap(json['data']) : null,
+      data: RegisterData.fromMap(json),
     );
   }
 }

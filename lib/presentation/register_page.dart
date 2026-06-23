@@ -91,6 +91,9 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
         );
 
+        print("Success: ${response.success}");
+        print("Message: ${response.message}");
+
         if (response.success) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
@@ -99,22 +102,30 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
           );
 
-          // Navigator.pushReplacement - tidak bisa kembali ke register
+          await Future.delayed(const Duration(seconds: 2));
+
+          if (!mounted) return;
+
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (_) => const LoginPage()),
+            MaterialPageRoute(
+              builder: (_) => const LoginPage(),
+            ),
           );
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(response.message),
-              backgroundColor: Colors.green,
+              backgroundColor: Colors.red,
             ),
           );
         }
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Error: $e"), backgroundColor: Colors.red),
+          SnackBar(
+            content: Text("Error: $e"),
+            backgroundColor: Colors.red,
+          ),
         );
       }
     }
