@@ -19,15 +19,55 @@ class _LoginPageState extends State<LoginPage> {
 
   bool _obscure = true;
 
+  // Future<void> _submit() async {
+  //   if (!_formKey.currentState!.validate()) return;
+
+  //   try {
+  //     final response = await _repo.login(
+  //       LoginRequest(
+  //         email: _emailCtr.text.trim(),
+  //         password: _passCtr.text,
+  //       ),
+  //     );
+
+  //     if (response.status == 'success') {
+  //       if (mounted) {
+  //         Navigator.pushAndRemoveUntil(
+  //           context,
+  //           MaterialPageRoute(
+  //             builder: (_) => HomePage(
+  //               username: response.user.name,
+  //             ),
+  //           ),
+  //           (_) => false,
+  //         );
+  //       }
+  //     } else {
+  //       _showMessage(
+  //         "Email atau Password Salah",
+  //         Colors.red,
+  //       );
+  //     }
+  //   } catch (e) {
+  //     _showMessage(
+  //       "Email atau Password Salah",
+  //       Colors.red,
+  //     );
+  //   }
+  // }
+
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) return;
 
-    final response = await _repo.login(
-      LoginRequest(email: _emailCtr.text, password: _passCtr.text),
-    );
+    try {
+      final response = await _repo.login(
+        LoginRequest(email: _emailCtr.text, password: _passCtr.text),
+      );
 
-    if (response.status == 'success') {
-      if (mounted) {
+      print("STATUS : ${response.status}");
+      print("USER : ${response.user.name}");
+
+      if (response.status == 'success') {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
@@ -35,9 +75,13 @@ class _LoginPageState extends State<LoginPage> {
           ),
           (_) => false,
         );
+      } else {
+        _showMessage("Email atau Password Salah", Colors.red);
       }
-    } else {
-      _showMessage("Email atau password salah", Colors.red);
+    } catch (e) {
+      print("LOGIN ERROR : $e");
+
+      _showMessage("Terjadi kesalahan saat login", Colors.red);
     }
   }
 

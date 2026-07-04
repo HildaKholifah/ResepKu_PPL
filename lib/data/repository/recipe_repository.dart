@@ -195,6 +195,8 @@ class RecipeRepository {
     final headers = await httpService.getHeaders();
     final response = await http.get(uri, headers: headers);
 
+    print(response.body);
+
     if (response.statusCode != 200) {
       throw Exception('Gagal memuat favorit: ${response.statusCode}');
     }

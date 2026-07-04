@@ -22,6 +22,8 @@ class _ProfilPageState extends State<ProfilPage> {
 
   File? _selectedImage;
 
+  bool _isUploading = false;
+
   late Future<User> _profileFuture;
 
   @override
@@ -35,38 +37,89 @@ class _ProfilPageState extends State<ProfilPage> {
     try {
       final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
 
-      if (pickedFile != null) {
-        setState(() {
-          _selectedImage = File(pickedFile.path);
-        });
+      if (pickedFile == null) return;
 
-        // upload otomatis
-        await _uploadProfilePhoto();
+      final file = File(pickedFile.path);
+
+      final fileSize = await file.length();
+
+      // 2 MB
+      const maxSize = 2 * 1024 * 1024;
+
+      if (fileSize > maxSize) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Ukuran foto maksimal 2 MB"),
+            backgroundColor: Colors.red,
+          ),
+        );
+        return;
       }
+
+      final extension = pickedFile.path.split('.').last.toLowerCase();
+
+      if (!['jpg', 'jpeg', 'png'].contains(extension)) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Format gambar harus JPG, JPEG, atau PNG'),
+            backgroundColor: Colors.red,
+          ),
+        );
+        return;
+      }
+
+      setState(() {
+        _selectedImage = file;
+      });
+
+      await _uploadProfilePhoto();
     } catch (e) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('Gagal memilih gambar: $e')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Gagal memilih gambar: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
   }
 
   // ================= UPLOAD PHOTO =================
   Future<void> _uploadProfilePhoto() async {
     try {
-      final response = await _profileRepo.uploadPhoto(_selectedImage!);
-
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(response.message)));
-
-      // refresh profile
       setState(() {
+        _isUploading = true;
+      });
+
+      final response = await _profileRepo.uploadPhoto(
+        _selectedImage!,
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(response.message),
+          backgroundColor: Colors.green,
+        ),
+      );
+
+      setState(() {
+        _selectedImage = null;
         _profileFuture = _profileRepo.getProfile();
       });
-    } catch (e) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('Upload gagal: $e')));
+    } catch (e, stackTrace) {
+      print("UPLOAD ERROR");
+      print(e);
+      print(stackTrace);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Upload gagal: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    } finally {
+      setState(() {
+        _isUploading = false;
+      });
     }
   }
 
@@ -274,23 +327,29 @@ class _ProfilPageState extends State<ProfilPage> {
           Column(
             children: [
               // Avatar
-              GestureDetector(
-                onTap: _pickImage,
-
-                child: CircleAvatar(
-                  radius: 55,
-
-                  backgroundColor: const Color(0xFF6B3E26),
-
-                  backgroundImage: user.photo != null
-                      ? NetworkImage(user.photo!)
-                      : null,
-
-                  child: user.photo == null
-                      ? const Icon(Icons.person, size: 60, color: Colors.white)
-                      : null,
-                ),
-              ),
+              _isUploading
+                ? const CircularProgressIndicator()
+                : GestureDetector(
+                    onTap: _pickImage,
+                    child: CircleAvatar(
+                      radius: 55,
+                      backgroundColor: const Color(0xFF6B3E26),
+                      backgroundImage: _selectedImage != null
+                          ? FileImage(_selectedImage!)
+                          : (user.photo != null
+                                ? NetworkImage(
+                                    "${user.photo!}?t=${DateTime.now().millisecondsSinceEpoch}",
+                                  )
+                                : null) as ImageProvider?,
+                      child: user.photo == null
+                          ? const Icon(
+                              Icons.person,
+                              size: 60,
+                              color: Colors.white,
+                            )
+                          : null,
+                    ),
+                  ),
 
               const SizedBox(height: 10),
 

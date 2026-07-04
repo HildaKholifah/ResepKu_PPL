@@ -3,14 +3,14 @@ import 'package:app_resepku/data/repository/recipe_repository.dart';
 import 'package:app_resepku/presentation/detail_resep_page.dart';
 import 'package:flutter/material.dart';
 
-class ResepFavoritPage extends StatefulWidget {
-  const ResepFavoritPage({super.key});
+class FavoritPage extends StatefulWidget {
+  const FavoritPage({super.key});
 
   @override
-  State<ResepFavoritPage> createState() => _ResepFavoritPageState();
+  State<FavoritPage> createState() => _FavoritPageState();
 }
 
-class _ResepFavoritPageState extends State<ResepFavoritPage> {
+class _FavoritPageState extends State<FavoritPage> {
   final RecipeRepository _repo = RecipeRepository();
   List<Recipe> _favorites = [];
   bool _isLoading = true;

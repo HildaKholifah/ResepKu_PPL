@@ -1,4 +1,5 @@
 import 'package:app_resepku/data/repository/favorit_repository.dart';
+import 'package:app_resepku/data/usecase/response/favorite_response.dart';
 import 'package:flutter/material.dart';
 import 'package:app_resepku/data/model/recipe.dart';
 import 'package:app_resepku/data/model/comment.dart';
@@ -30,6 +31,9 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
   // list komentar
   List<Comment> comments = [];
 
+  // Komentar Error
+  String? commentError;
+
   // loading komentar
   bool isLoadingComment = true;
 
@@ -42,6 +46,9 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
 
     // load komentar
     _loadComments();
+
+    // cek status favorite
+    _loadFavoriteStatus();
   }
 
   // SHARE RESEP
@@ -70,26 +77,26 @@ Dibagikan dari aplikasi ResepKu ❤️
   // TOGGLE FAVORITE
   Future<void> _toggleFavorite() async {
     try {
-      final response = await favoriteRepository.toggleFavorite(
-        widget.recipe.id,
-      );
+      late final response;
 
-      setState(() {
-        isFavorite = !isFavorite;
-      });
-
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(response.message),
-            backgroundColor: Colors.green,
-          ),
-        );
+      if (isFavorite) {
+        response = await favoriteRepository.removeFavorite(widget.recipe.id);
+      } else {
+        response = await favoriteRepository.addFavorite(widget.recipe.id);
       }
+
+      // setState(() {
+      //   isFavorite = !isFavorite;
+      // });
+      await _loadFavoriteStatus();
+
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(response.message)));
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Error: $e"), backgroundColor: Colors.red),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Error : $e")));
     }
   }
 
@@ -109,16 +116,40 @@ Dibagikan dari aplikasi ResepKu ❤️
     }
   }
 
+  // LOAD FAVORITE STATUS
+  Future<void> _loadFavoriteStatus() async {
+    try {
+      final result = await favoriteRepository.checkFavorite(
+        widget.recipe.id,
+      );
+
+      if (!mounted) return;
+
+      setState(() {
+        isFavorite = result;
+      });
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
   // TAMBAH KOMENTAR
   Future<void> _addComment() async {
     if (commentController.text.trim().isEmpty) {
+      setState(() {
+        commentError = "Komentar tidak boleh kosong";
+      });
       return;
     }
+
+    setState(() {
+      commentError = null;
+    });
 
     try {
       await commentRepository.addComment(
         widget.recipe.id,
-        commentController.text,
+        commentController.text.trim(),
       );
 
       commentController.clear();
@@ -126,7 +157,10 @@ Dibagikan dari aplikasi ResepKu ❤️
       await _loadComments();
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Komentar berhasil ditambahkan')),
+        const SnackBar(
+          content: Text('Komentar berhasil ditambahkan'),
+          backgroundColor: Colors.green,
+        ),
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -529,34 +563,42 @@ Dibagikan dari aplikasi ResepKu ❤️
 
   // INPUT KOMENTAR
   Widget _commentInputSection() {
-    return Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Expanded(
-          child: TextField(
-            controller: commentController,
-
-            decoration: InputDecoration(
-              hintText: 'Tulis komentar...',
-
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
+        Row(
+          children: [
+            Expanded(
+              child: TextField(
+                controller: commentController,
+                decoration: InputDecoration(
+                  hintText: 'Tulis komentar...',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
               ),
             ),
-          ),
+            const SizedBox(width: 10),
+            ElevatedButton(
+              onPressed: _addComment,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: primaryBrown,
+                padding: const EdgeInsets.all(16),
+              ),
+              child: const Icon(Icons.send, color: Colors.white),
+            ),
+          ],
         ),
 
-        const SizedBox(width: 10),
-
-        ElevatedButton(
-          onPressed: _addComment,
-
-          style: ElevatedButton.styleFrom(
-            backgroundColor: primaryBrown,
-            padding: const EdgeInsets.all(16),
+        if (commentError != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: Text(
+              commentError!,
+              style: const TextStyle(color: Colors.red, fontSize: 12),
+            ),
           ),
-
-          child: const Icon(Icons.send, color: Colors.white),
-        ),
       ],
     );
   }

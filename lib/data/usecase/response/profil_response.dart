@@ -14,8 +14,8 @@ class ProfilResponse {
 
   factory ProfilResponse.fromMap(Map<String, dynamic> json) {
     return ProfilResponse(
-      status: json['status'],
-      message: json['message'],
+      status: json['status']?.toString() ?? 'success',
+      message: json['message']?.toString() ?? 'Berhasil',
     );
   }
 }

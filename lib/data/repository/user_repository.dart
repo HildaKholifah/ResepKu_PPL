@@ -17,6 +17,9 @@ class UserRepository {
     final decoded = jsonDecode(response.body);
     final loginResponse = LoginResponse.fromMap(decoded);
 
+    print("LOGIN STATUS : ${response.statusCode}");
+    print("LOGIN BODY : ${response.body}");
+
     // ✅ SIMPAN TOKEN JIKA LOGIN BERHASIL
     if (loginResponse.status == 'success' && loginResponse.token.isNotEmpty) {
       await tokenStorage.saveToken(loginResponse.token);

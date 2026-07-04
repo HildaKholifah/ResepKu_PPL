@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'token_storage.dart';
 
 class HttpService {
-  final String baseUrl = "http://10.77.7.44:8000/api/";
+  final String baseUrl = "http://192.168.100.12:8000/api/";
   final TokenStorage tokenStorage = TokenStorage();
 
   // PUBLIK (BUKAN PRIVATE)
@@ -39,6 +39,21 @@ class HttpService {
 
     log('POST $endpoint => ${response.statusCode}');
     log(response.body);
+    return response;
+  }
+  
+  Future<http.Response> delete(String endpoint) async {
+    final url = Uri.parse('$baseUrl$endpoint');
+
+    final headers = await getHeaders();
+
+    final response = await http
+        .delete(url, headers: headers)
+        .timeout(const Duration(seconds: 30));
+
+    log('DELETE $endpoint => ${response.statusCode}');
+    log(response.body);
+
     return response;
   }
 

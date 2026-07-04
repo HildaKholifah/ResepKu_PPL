@@ -10,14 +10,10 @@ class ProfilRepository {
   Future<User> getProfile() async {
     final response = await httpService.get('me');
 
-    if (response.statusCode != 200) {
-      throw Exception('HTTP error');
-    }
-    final Map<String, dynamic> json = jsonDecode(response.body);
+    print("PROFILE RESPONSE:");
+    print(response.body);
 
-    if (!json.containsKey('user')) {
-      throw Exception('Invalid profile response');
-    }
+    final Map<String, dynamic> json = jsonDecode(response.body);
 
     return User.fromMap(json['user']);
   }
@@ -38,14 +34,10 @@ class ProfilRepository {
     required String email,
     File? photo,
   }) async {
-
     final response = await httpService.postWithFile(
       'profile/update',
 
-      {
-        'name': name,
-        'email': email,
-      },
+      {'name': name, 'email': email},
 
       photo,
       'photo',
@@ -59,16 +51,11 @@ class ProfilRepository {
     required String newPassword,
     required String confirmPassword,
   }) async {
-
-    final response = await httpService.post(
-      'change-password',
-
-      {
-        'current_password': currentPassword,
-        'new_password': newPassword,
-        'new_password_confirmation': confirmPassword,
-      },
-    );
+    final response = await httpService.post('change-password', {
+      'current_password': currentPassword,
+      'new_password': newPassword,
+      'new_password_confirmation': confirmPassword,
+    });
 
     return response.body;
   }

@@ -1,7 +1,6 @@
 import 'package:app_resepku/presentation/detail_resep_page.dart';
 import 'package:app_resepku/presentation/profil_page.dart';
-import 'package:app_resepku/presentation/rating_page.dart';
-import 'package:app_resepku/presentation/resep_favorit_page.dart';
+import 'package:app_resepku/presentation/favorit_page.dart';
 import 'package:app_resepku/presentation/resep_saya_page.dart';
 import 'package:flutter/material.dart';
 import 'package:app_resepku/data/model/recipe.dart';
@@ -47,7 +46,7 @@ class _HomePageState extends State<HomePage> {
   List get _pages => [
     dashboard(),
     ResepSayaPage(username: widget.username),
-    ResepFavoritPage(),
+    FavoritPage(),
     ProfilPage(),
   ];
 

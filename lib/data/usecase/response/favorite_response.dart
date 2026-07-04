@@ -1,21 +1,21 @@
 import 'dart:convert';
 
 class FavoriteResponse {
-  final String status;
+  final bool success;
   final String message;
 
-  FavoriteResponse({required this.status, required this.message});
+  FavoriteResponse({
+    required this.success,
+    required this.message,
+  });
 
   factory FavoriteResponse.fromJson(String str) =>
       FavoriteResponse.fromMap(json.decode(str));
 
   factory FavoriteResponse.fromMap(Map<String, dynamic> json) {
-    return FavoriteResponse(status: json['status'], message: json['message']);
+    return FavoriteResponse(
+      success: json['success'] ?? false,
+      message: json['message'] ?? '',
+    );
   }
-
-  Map<String, dynamic> toMap() {
-    return {'status': status, 'message': message};
-  }
-
-  String toJson() => json.encode(toMap());
 }
