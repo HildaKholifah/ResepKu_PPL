@@ -46,7 +46,7 @@ class ProfilRepository {
     return jsonDecode(response.body);
   }
 
-  Future<dynamic> changePassword({
+  Future<void> changePassword({
     required String currentPassword,
     required String newPassword,
     required String confirmPassword,
@@ -57,6 +57,10 @@ class ProfilRepository {
       'new_password_confirmation': confirmPassword,
     });
 
-    return response.body;
+    final data = jsonDecode(response.body);
+
+    if (response.statusCode != 200) {
+      throw Exception(data['message']);
+    }
   }
 }

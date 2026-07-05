@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app_resepku/presentation/change_password_page.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:app_resepku/data/repository/profil_repository.dart';
@@ -90,9 +91,7 @@ class _ProfilPageState extends State<ProfilPage> {
         _isUploading = true;
       });
 
-      final response = await _profileRepo.uploadPhoto(
-        _selectedImage!,
-      );
+      final response = await _profileRepo.uploadPhoto(_selectedImage!);
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -121,104 +120,6 @@ class _ProfilPageState extends State<ProfilPage> {
         _isUploading = false;
       });
     }
-  }
-
-  // ================= DIALOG GANTI PASSWORD =================
-  void _showChangePasswordDialog() {
-    final currentPasswordController = TextEditingController();
-
-    final newPasswordController = TextEditingController();
-
-    final confirmPasswordController = TextEditingController();
-
-    showDialog(
-      context: context,
-
-      builder: (context) {
-        return AlertDialog(
-          title: const Text("Ganti Password"),
-
-          content: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-
-              children: [
-                // Password Lama
-                TextField(
-                  controller: currentPasswordController,
-
-                  obscureText: true,
-
-                  decoration: const InputDecoration(labelText: "Password Lama"),
-                ),
-
-                const SizedBox(height: 12),
-
-                // Password Baru
-                TextField(
-                  controller: newPasswordController,
-
-                  obscureText: true,
-
-                  decoration: const InputDecoration(labelText: "Password Baru"),
-                ),
-
-                const SizedBox(height: 12),
-
-                // Konfirmasi Password
-                TextField(
-                  controller: confirmPasswordController,
-
-                  obscureText: true,
-
-                  decoration: const InputDecoration(
-                    labelText: "Konfirmasi Password",
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          actions: [
-            // Batal
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-
-              child: const Text("Batal"),
-            ),
-
-            // Simpan
-            ElevatedButton(
-              onPressed: () async {
-                try {
-                  await _profileRepo.changePassword(
-                    currentPassword: currentPasswordController.text,
-
-                    newPassword: newPasswordController.text,
-
-                    confirmPassword: confirmPasswordController.text,
-                  );
-
-                  Navigator.pop(context);
-
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Password berhasil diubah")),
-                  );
-                } catch (e) {
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(SnackBar(content: Text("Gagal: $e")));
-                }
-              },
-
-              child: const Text("Simpan"),
-            ),
-          ],
-        );
-      },
-    );
   }
 
   // ================= DIALOG LOGOUT =================
@@ -328,28 +229,29 @@ class _ProfilPageState extends State<ProfilPage> {
             children: [
               // Avatar
               _isUploading
-                ? const CircularProgressIndicator()
-                : GestureDetector(
-                    onTap: _pickImage,
-                    child: CircleAvatar(
-                      radius: 55,
-                      backgroundColor: const Color(0xFF6B3E26),
-                      backgroundImage: _selectedImage != null
-                          ? FileImage(_selectedImage!)
-                          : (user.photo != null
-                                ? NetworkImage(
-                                    "${user.photo!}?t=${DateTime.now().millisecondsSinceEpoch}",
-                                  )
-                                : null) as ImageProvider?,
-                      child: user.photo == null
-                          ? const Icon(
-                              Icons.person,
-                              size: 60,
-                              color: Colors.white,
-                            )
-                          : null,
+                  ? const CircularProgressIndicator()
+                  : GestureDetector(
+                      onTap: _pickImage,
+                      child: CircleAvatar(
+                        radius: 55,
+                        backgroundColor: const Color(0xFF6B3E26),
+                        backgroundImage: _selectedImage != null
+                            ? FileImage(_selectedImage!)
+                            : (user.photo != null
+                                      ? NetworkImage(
+                                          "${user.photo!}?t=${DateTime.now().millisecondsSinceEpoch}",
+                                        )
+                                      : null)
+                                  as ImageProvider?,
+                        child: user.photo == null
+                            ? const Icon(
+                                Icons.person,
+                                size: 60,
+                                color: Colors.white,
+                              )
+                            : null,
+                      ),
                     ),
-                  ),
 
               const SizedBox(height: 10),
 
@@ -409,7 +311,14 @@ class _ProfilPageState extends State<ProfilPage> {
 
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
 
-                onPressed: _showChangePasswordDialog,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const ChangePasswordPage(),
+                    ),
+                  );
+                },
               ),
             ),
           ),
