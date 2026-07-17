@@ -34,10 +34,10 @@ class _RegisterPageState extends State<RegisterPage> {
               icon: const Icon(Icons.arrow_back, color: Colors.white),
               onPressed: () => Navigator.pop(context),
             ),
-            Image.asset(
-              'assets/Logo_ResepKu.png',
-              width: 60,
-              fit: BoxFit.contain,
+            CircleAvatar(
+              radius: 25,
+              backgroundColor: Colors.white,
+              backgroundImage: const AssetImage('assets/Logo_ResepKu.png'),
             ),
           ],
         ),
@@ -108,9 +108,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(
-              builder: (_) => const LoginPage(),
-            ),
+            MaterialPageRoute(builder: (_) => const LoginPage()),
           );
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -122,10 +120,7 @@ class _RegisterPageState extends State<RegisterPage> {
         }
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text("Error: $e"),
-            backgroundColor: Colors.red,
-          ),
+          SnackBar(content: Text("Error: $e"), backgroundColor: Colors.red),
         );
       }
     }

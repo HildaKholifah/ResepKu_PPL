@@ -1,3 +1,4 @@
+import 'package:app_resepku/presentation/custom_app_bar.dart';
 import 'package:app_resepku/presentation/edit_resep_page.dart';
 import 'package:app_resepku/presentation/home_page.dart';
 import 'package:app_resepku/presentation/profil_page.dart';
@@ -49,7 +50,9 @@ class _MyRecipePageState extends State<ResepSayaPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
-      appBar: _buildAppBar(),
+      appBar: const CustomAppBar(
+        title: "Resep Saya",
+      ),
       body: _buildContent(),
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: primaryBrown,
@@ -67,18 +70,6 @@ class _MyRecipePageState extends State<ResepSayaPage> {
                 _loadMyRecipes();
               });
         },
-      ),
-    );
-  }
-
-  // APP Bar
-  AppBar _buildAppBar() {
-    return AppBar(
-      backgroundColor: const Color(0xFFB8792F),
-      centerTitle: true,
-      title: const Text(
-        "Resep Saya",
-        style: TextStyle(fontWeight: FontWeight.bold),
       ),
     );
   }

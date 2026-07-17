@@ -1,3 +1,4 @@
+import 'package:app_resepku/presentation/custom_app_bar.dart';
 import 'package:app_resepku/presentation/detail_resep_page.dart';
 import 'package:app_resepku/presentation/profil_page.dart';
 import 'package:app_resepku/presentation/favorit_page.dart';
@@ -91,7 +92,9 @@ class _HomePageState extends State<HomePage> {
   // dashboard
   Widget dashboard() {
     return Scaffold(
-      appBar: _buildAppBar(),
+      appBar: const CustomAppBar(
+        title: "ResepKu",
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -139,29 +142,6 @@ class _HomePageState extends State<HomePage> {
         print(_filteredRecipes[index].imageUrl);
         return _recipeCard(_filteredRecipes[index]);
       },
-    );
-  }
-
-  // UI Components
-  AppBar _buildAppBar() {
-    return AppBar(
-      backgroundColor: const Color(0xFFB8792F),
-      elevation: 6,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
-      ),
-      centerTitle: true,
-      title: const Text(
-        "ResepKu",
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-      ),
-      leading: Padding(
-        padding: const EdgeInsets.all(8),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(50),
-          child: Image.asset("assets/Logo_ResepKu.png"),
-        ),
-      ),
     );
   }
 

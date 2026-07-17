@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:app_resepku/presentation/change_password_page.dart';
+import 'package:app_resepku/presentation/custom_app_bar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:app_resepku/data/repository/profil_repository.dart';
@@ -45,12 +46,12 @@ class _ProfilPageState extends State<ProfilPage> {
       final fileSize = await file.length();
 
       // 2 MB
-      const maxSize = 2 * 1024 * 1024;
+      const maxSize = 10 * 1024 * 1024;
 
       if (fileSize > maxSize) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text("Ukuran foto maksimal 2 MB"),
+            content: Text("Ukuran foto maksimal 10 MB"),
             backgroundColor: Colors.red,
           ),
         );
@@ -173,16 +174,8 @@ class _ProfilPageState extends State<ProfilPage> {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
 
-      appBar: AppBar(
-        backgroundColor: const Color(0xFFB8792F),
-
-        centerTitle: true,
-
-        title: const Text(
-          "Profil",
-
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
+      appBar: const CustomAppBar(
+        title: "Profil",
       ),
 
       body: FutureBuilder<User>(
